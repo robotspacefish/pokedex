@@ -1,6 +1,6 @@
 import React from 'react';
 import { BASE_URL } from './helpers/helpers';
-import { filterNewPokemon, getPokemonData, setLocalStorage, retrieveLocalStorage } from './helpers/pokemonHelpers';
+import { filterOutDuplicates, getPokemonData, setLocalStorage, retrieveLocalStorage } from './helpers/pokemonHelpers';
 
 import './App.css';
 
@@ -39,7 +39,7 @@ class App extends React.Component {
   async fetchPokemon(url) {
     const res = await getPokemonData(url);
 
-    // const filteredResults = filterNewPokemon(res.results, this.state.pokemon);
+    // const filteredResults = filterOutDuplicates(res.results, this.state.pokemon);
 
     // debugger
     // const updatedFilteredResults = filteredResults.map(res => {

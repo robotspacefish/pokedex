@@ -6,7 +6,7 @@ import { findById } from './helpers';
  * @param {Array} currentPokemonArray - current pokemon
  * @return {Array} pokemon list without duplicates
 **/
-export function filterNewPokemon(pokemonToFilter, currentPokemonArray) {
+export function filterOutDuplicates(pokemonToFilter, currentPokemonArray) {
   return pokemonToFilter.filter(p => !findById(p.name, currentPokemonArray));
 }
 
