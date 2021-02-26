@@ -1,6 +1,6 @@
 import React from 'react';
 import { BASE_URL } from './helpers/helpers';
-import { filterOutDuplicates, getPokemonData, setLocalStorage, retrieveLocalStorage, fetchSinglePokemon } from './helpers/pokemonHelpers';
+import { filterOutDuplicates, getPokemonData, setLocalStorage, retrieveLocalStorage } from './helpers/pokemonHelpers';
 
 import './App.css';
 
