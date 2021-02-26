@@ -11,8 +11,8 @@ class App extends React.Component {
     this.state = {
       pokemon: [],
       featured: null,
-      prevUrl: null,
-      nextUrl: null,
+      previous: null,
+      next: null,
       count: 0
     };
   }
