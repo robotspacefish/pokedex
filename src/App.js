@@ -1,6 +1,6 @@
 import React from 'react';
 import { BASE_URL } from './helpers/helpers';
-import { filterOutDuplicates, getPokemonData, setLocalStorage, retrieveLocalStorage } from './helpers/pokemonHelpers';
+import { filterOutDuplicates, getPokemonData, setLocalStorage, retrieveLocalStorage, fetchSinglePokemon } from './helpers/pokemonHelpers';
 
 import './App.css';
 
@@ -23,7 +23,6 @@ class App extends React.Component {
     // if there are some pokemon set those in state
     const pokemonState = retrieveLocalStorage();
 
-
     if (pokemonState) {
       console.log('retrieving from local storage')
       this.setState({ ...pokemonState });
@@ -34,39 +33,34 @@ class App extends React.Component {
 
   }
 
-
-
   async fetchPokemon(url) {
-    const res = await getPokemonData(url);
+    try {
+      const pokemon = await getPokemonData(url);
 
-    // const filteredResults = filterOutDuplicates(res.results, this.state.pokemon);
+      // make sure this pokemon data doesn't already exist in state
+      const filteredPokemon = filterOutDuplicates(pokemon.results, this.state.pokemon);
 
-    // debugger
-    // const updatedFilteredResults = filteredResults.map(res => {
-    //   return this.fetchSinglePokemon(res.url);
-    // })
+      // get each pokemon's individual stats
+      const detailedPokemon = await Promise.all(filteredPokemon.map(async p => {
+        const pokemon = await getPokemonData(p.url);
+        return pokemon;
+      }))
 
-    // const updatedPokemon = [...this.state.pokemon, ...updatedFilteredResults];
-    this.setState(() => ({
-      pokemon: res.results,
-      prevUrl: res.previous,
-      nextUrl: res.next,
-      count: res.count
-    }), () => {
-      setLocalStorage(this.state);
-    });
+      // combine existing and newly fetched pokemon for state
+      const updatedPokemon = [...this.state.pokemon, ...detailedPokemon];
+
+      this.setState(() => ({
+        pokemon: updatedPokemon,
+        prevUrl: pokemon.previous,
+        nextUrl: pokemon.next,
+        count: pokemon.count
+      }), () => {
+        setLocalStorage(this.state);
+      });
+    } catch (err) {
+      console.log('Something went wrong...', err)
+    }
   }
-
-  async fetchSinglePokemon(url) {
-    const res = await getPokemonData(url);
-    return res.results;
-    // const updatedPokemon = this.state.pokemon(p => (
-    //   (p.name === res.results.name) ? res.results : p
-    // ))
-
-    // this.setState(() => ({ pokemon: updatedPokemon }));
-  }
-
 
   fetchNextGroup = () => {
     if (this.state.nextUrl) {
