@@ -11,13 +11,16 @@ export function filterOutDuplicates(pokemonToFilter, currentPokemonArray) {
 }
 
 export async function getPokemonData(url) {
-  return new Promise((resolve, reject) => {
-    fetch(url)
-      .then(res => res.json())
-      .then(data => {
-        resolve(data); // return data for the pokemon api
-      })
-  });
+  try {
+    console.log('getting pokemon')
+    const response = await fetch(url);
+    const pokemon = await response.json();
+
+    return pokemon;
+
+  } catch (e) {
+    console.error("Error: Bad Url:", url)
+  }
 }
 
 export function setLocalStorage(pokemonState) {
