@@ -1,0 +1,11 @@
+.Featured {
+  background-color: rgb(243, 243, 217); /* TODO set by type */
+  width: 100%;
+
+  img {
+    @media only screen and (max-width: 640px) {
+      max-height: 200px;
+      width: auto;
+    }
+  }
+}
