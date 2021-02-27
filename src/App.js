@@ -9,7 +9,7 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      pokemon: [],
+      results: [],
       featured: null,
       previous: null,
       next: null,
