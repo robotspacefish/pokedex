@@ -13,9 +13,14 @@ function findById(name, allPokemon) {
   return allPokemon.find(p => p.name === name)
 }
 
+function capitalize(str) {
+  return str[0].toUpperCase() + str.substring(1);
+}
+
 export {
   BASE_URL,
   isEmpty,
   createIDFromUrl,
-  findById
+  findById,
+  capitalize
 }
