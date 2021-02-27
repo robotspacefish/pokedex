@@ -13,7 +13,8 @@ class Pokedex extends React.Component {
       featured: null,
       previous: null,
       next: null,
-      count: 0
+      count: 0,
+      isLoading: true
     };
   }
 
