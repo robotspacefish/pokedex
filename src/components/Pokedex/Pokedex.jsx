@@ -1,7 +1,7 @@
 import React from 'react';
 import { BASE_URL } from '../../helpers/helpers';
 import { filterOutDuplicates, getPokemonData, getGroupDetails } from '../../helpers/pokemonHelpers';
-
+import Featured from '../Featured/Featured';
 import './Pokedex.scss';
 
 class Pokedex extends React.Component {
@@ -37,18 +37,25 @@ class Pokedex extends React.Component {
   async fetchAndStorePokemon(url) {
     const data = await getPokemonData(url);
     const detailedPokemon = await getGroupDetails(data.results);
+    const featuredIndex = Math.floor(Math.random() * detailedPokemon.length);
 
     this.setState(prevState => ({
       ...data,
-      results: [...prevState.results, ...detailedPokemon]
+      results: [...prevState.results, ...detailedPokemon],
+      featured: detailedPokemon[featuredIndex],
+      isLoading: false
     }))
   }
 
   render() {
     return (
       <div className="Pokedex">
+        {
+          this.state.isLoading ? <h1>Loading...</h1>
+            : <Featured {...this.state.featured} />
+        }
         {/* <button onClick={this.fetchPrevGroup}>Prev</button> */}
-        <button onClick={this.fetchNextGroup}>Next</button>
+        {/* <button onClick={this.fetchNextGroup}>Next</button> */}
       </div>
     );
   }
