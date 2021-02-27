@@ -2,7 +2,7 @@ import React from 'react';
 import { BASE_URL } from './helpers/helpers';
 import { filterOutDuplicates, getPokemonData, getGroupDetails } from './helpers/pokemonHelpers';
 
-import './App.css';
+import './App.scss';
 
 class App extends React.Component {
   constructor(props) {
