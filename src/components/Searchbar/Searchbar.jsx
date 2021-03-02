@@ -28,7 +28,7 @@ export default class Searchbar extends Component {
             name="query"
             onChange={this.handleOnChange}
           />
-          <input type="submit" />
+          <input type="submit" value="Search" />
         </form>
       </div>
     )

@@ -2,6 +2,8 @@ import React from 'react';
 import { BASE_URL } from '../../helpers/helpers';
 import { filterOutDuplicates, getPokemonData, getGroupDetails } from '../../helpers/pokemonHelpers';
 import Featured from '../Featured/Featured';
+import Searchbar from '../Searchbar/Searchbar';
+
 import './Pokedex.scss';
 
 class Pokedex extends React.Component {
@@ -54,6 +56,8 @@ class Pokedex extends React.Component {
           this.state.isLoading ? <h1>Loading...</h1>
             : <Featured {...this.state.featured} />
         }
+
+        <Searchbar />
         {/* <button onClick={this.fetchPrevGroup}>Prev</button> */}
         {/* <button onClick={this.fetchNextGroup}>Next</button> */}
       </div>
