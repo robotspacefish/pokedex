@@ -8,9 +8,13 @@ export default function Card({ p }) {
 
   return (
     <div className="Card" style={{ border: `2px solid ${color}` }}>
-      <div className="poke-number" style={{ backgroundColor: color }}>
-        <span>{p.id}</span>
-      </div>
+      <header>
+        <div className="Card--number" style={{ backgroundColor: color }}>
+          <span>{p.id}</span>
+        </div>
+
+        <h3 className="Card--name">{p.name}</h3>
+      </header>
       <img src={img} alt="" />
     </div>
   )
