@@ -3,6 +3,7 @@ import { BASE_URL } from '../../helpers/helpers';
 import { filterOutDuplicates, getPokemonData, getGroupDetails } from '../../helpers/pokemonHelpers';
 import Featured from '../Featured/Featured';
 import Searchbar from '../Searchbar/Searchbar';
+import Cards from '../Cards/Cards';
 
 import './Pokedex.scss';
 
@@ -54,10 +55,14 @@ class Pokedex extends React.Component {
       <div className="Pokedex">
         {
           this.state.isLoading ? <h1>Loading...</h1>
-            : <Featured {...this.state.featured} />
+            :
+            <>
+              <Featured {...this.state.featured} />
+              <Searchbar />
+              <Cards pokemon={this.state.results} />
+            </>
         }
 
-        <Searchbar />
         {/* <button onClick={this.fetchPrevGroup}>Prev</button> */}
         {/* <button onClick={this.fetchNextGroup}>Next</button> */}
       </div>

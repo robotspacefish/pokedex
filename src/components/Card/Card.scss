@@ -1,0 +1,25 @@
+.Card {
+  margin: 10px;
+  width: 300px;
+  height: 400px;
+  border-radius: 15px;
+  padding: 10px;
+  position: relative;
+
+  .poke-number {
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    color: white;
+    min-width: 60px;
+    font-size: 2em;
+    padding: 10px;
+    border-top-left-radius: 15px;
+  }
+
+  img {
+    max-width: 200px;
+    height: auto;
+  }
+}
+
