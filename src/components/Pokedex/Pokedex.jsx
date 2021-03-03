@@ -40,12 +40,20 @@ class Pokedex extends React.Component {
   async fetchAndStorePokemon(url) {
     const data = await getPokemonData(url);
     const detailedPokemon = await getGroupDetails(data.results);
-    const featuredIndex = Math.floor(Math.random() * detailedPokemon.length);
+
+    // get featured pokemon from already fetched group or fetch new pokemon if # is higher than what is stored
+    const featured = Math.floor(Math.random() * data.count) + 1;
+    let featuredPokemon;
+    if (featured < 20) featuredPokemon = detailedPokemon.find(p => p.id === featured);
+    else {
+      console.log('getting featured pokemon #', featured)
+      featuredPokemon = await getPokemonData(`https://pokeapi.co/api/v2/pokemon/${featured}/`);
+    }
 
     this.setState(prevState => ({
       ...data,
       results: [...prevState.results, ...detailedPokemon],
-      featured: detailedPokemon[featuredIndex],
+      featured: featuredPokemon,
       isLoading: false
     }))
   }
