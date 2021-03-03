@@ -30,6 +30,35 @@
   img {
     max-width: 200px;
     height: auto;
+    margin: 5px;
   }
+
+  .Card--info {
+
+  }
+
+  .Card--stats__stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .stat-box {
+    padding: 3px;
+
+    &:hover {
+      cursor: default;
+    }
+  }
+
+  .Card--stats__types,
+  .Card--stats__size {
+    display: flex;
+
+    .stat-box {
+      width: 100%;
+      flex: 1;
+    }
+  }
+
 }
 
