@@ -1,4 +1,4 @@
-const BASE_URL = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=20";
+import { TYPES } from './pokemonHelpers';
 
 export const BASE_URL = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=20";
 const LENGTH = BASE_URL.length;
@@ -43,3 +43,6 @@ export function convertHeight(height) {
   return (height / 3.048).toFixed(1);
 }
 
+export function getColor(p) {
+  return TYPES[p.types[0].type.name];
+}
