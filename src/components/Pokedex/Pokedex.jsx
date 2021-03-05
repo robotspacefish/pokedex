@@ -4,6 +4,7 @@ import { filterOutDuplicates, getPokemonData, getGroupDetails } from '../../help
 import Featured from '../Featured/Featured';
 import Searchbar from '../Searchbar/Searchbar';
 import Cards from '../Cards/Cards';
+import Loader from '../Loader/Loader';
 
 import './Pokedex.scss';
 
@@ -62,7 +63,7 @@ class Pokedex extends React.Component {
     return (
       <div className="Pokedex">
         {
-          this.state.isLoading ? <h1>Loading...</h1>
+          this.state.isLoading ? <Loader />
             :
             <>
               <Featured {...this.state.featured} />

@@ -3,6 +3,9 @@ import { TYPES } from './pokemonHelpers';
 export const BASE_URL = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=20";
 const LENGTH = BASE_URL.length;
 
+const TYPES_KEYS = Object.keys(TYPES);
+const TYPES_LENGTH = Object.keys(TYPES).length;
+
 export function isEmpty(arr) {
   return arr.length === 0;
 }
@@ -45,4 +48,19 @@ export function convertHeight(height) {
 
 export function getColor(p) {
   return TYPES[p.types[0].type.name];
+}
+
+export function getRandomColor() {
+
+  const color = getRandomInt(0, TYPES_LENGTH);
+  return TYPES[TYPES_KEYS[color]];
+}
+
+/**
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+ */
+export function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
 }
