@@ -18,12 +18,16 @@ class Pokedex extends React.Component {
       previous: null,
       next: null,
       count: 0,
-      isLoading: true
+      isLoading: true,
+      observerTarget: null
     };
   }
 
   async componentDidMount() {
-    this.fetchAndStorePokemon(BASE_URL);
+    this.observer = new IntersectionObserver((entries, observer) => this.handleObserve(entries, observer));
+
+    await this.fetchAndStorePokemon(BASE_URL);
+
   }
 
   fetchNextGroup = () => {
@@ -32,11 +36,17 @@ class Pokedex extends React.Component {
     }
   }
 
-  // fetchPrevGroup = () => {
-  //   if (this.state.previous) {
-  //     const data = getPokemonData(this.state.previous);
-  //   }
-  // }
+  handleObserve = (entries, observer) => {
+    if (!this.state.next) return;
+    if (!entries[0].isIntersecting) return;
+
+    const target = entries[0].target
+
+    if (target.id == this.state.observerTarget) {
+      observer.unobserve(target);
+      this.fetchNextGroup();
+    }
+  }
 
   async fetchAndStorePokemon(url) {
     const data = await getPokemonData(url);
@@ -55,8 +65,12 @@ class Pokedex extends React.Component {
       ...data,
       results: [...prevState.results, ...detailedPokemon],
       featured: featuredPokemon,
-      isLoading: false
-    }))
+      isLoading: false,
+      observerTarget: detailedPokemon[detailedPokemon.length - 1].id
+    }), () => {
+      console.log("new observer target:", this.state.observerTarget)
+      this.observer.observe(document.getElementById(this.state.observerTarget))
+    });
   }
 
   render() {
@@ -71,9 +85,6 @@ class Pokedex extends React.Component {
               <Cards pokemon={this.state.results} />
             </>
         }
-
-        {/* <button onClick={this.fetchPrevGroup}>Prev</button> */}
-        {/* <button onClick={this.fetchNextGroup}>Next</button> */}
       </div>
     );
   }
