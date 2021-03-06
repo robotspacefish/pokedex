@@ -50,7 +50,7 @@ class Pokedex extends React.Component {
 
   async fetchAndStorePokemon(url) {
     const data = await getPokemonData(url);
-    const detailedPokemon = await getGroupDetails(data.results);
+    let detailedPokemon = await getGroupDetails(data.results);
 
     // get featured pokemon from already fetched group or fetch new pokemon if # is higher than what is stored
     // const featured = Math.floor(Math.random() * data.count) + 1;
@@ -60,6 +60,10 @@ class Pokedex extends React.Component {
     //   console.log('getting featured pokemon #', featured)
     //   featuredPokemon = await getPokemonData(`https://pokeapi.co/api/v2/pokemon/${featured}/`);
     // }
+    // if (this.state.results.length >= 99) debugger;
+
+    // TEMP FIX to filter out pokemon when it can't be pulled from API and comes back undefined
+    detailedPokemon = detailedPokemon.filter(p => p !== undefined);
 
     this.setState(prevState => ({
       ...data,
