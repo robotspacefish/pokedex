@@ -44,7 +44,7 @@ class Pokedex extends React.Component {
 
     if (target.id == this.state.observerTarget) {
       observer.unobserve(target);
-      this.fetchNextGroup();
+      this.setState({ isLoading: true }, () => this.fetchNextGroup());
     }
   }
 
