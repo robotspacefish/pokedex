@@ -7,7 +7,7 @@ export default function Card({ p }) {
   const color = getColor(p);
 
   return (
-    <div className="Card" style={{ border: `2px solid ${color}` }}>
+    <div className="Card" id={p.id} style={{ border: `2px solid ${color}` }}>
       <header>
         <div className="Card--number" style={{ backgroundColor: color }}>
           <span>{p.id}</span>
