@@ -23,10 +23,10 @@ class Pokedex extends React.Component {
     };
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     this.observer = new IntersectionObserver((entries, observer) => this.handleObserve(entries, observer));
 
-    await this.fetchAndStorePokemon(BASE_URL);
+    this.fetchAndStorePokemon(BASE_URL);
 
   }
 
