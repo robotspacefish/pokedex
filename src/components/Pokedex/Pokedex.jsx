@@ -23,11 +23,14 @@ class Pokedex extends React.Component {
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.observer = new IntersectionObserver((entries, observer) => this.handleObserve(entries, observer));
 
-    this.fetchAndStorePokemon(BASE_URL);
+    await this.fetchAndStorePokemon(BASE_URL);
 
+    const featured = Math.floor(Math.random() * this.state.count) + 1;
+    const featuredPokemon = await getPokemonData(`https://pokeapi.co/api/v2/pokemon/${featured}/`);
+    this.setState({ featured: featuredPokemon });
   }
 
   fetchNextGroup = () => {
@@ -52,23 +55,12 @@ class Pokedex extends React.Component {
     const data = await getPokemonData(url);
     let detailedPokemon = await getGroupDetails(data.results);
 
-    // get featured pokemon from already fetched group or fetch new pokemon if # is higher than what is stored
-    // const featured = Math.floor(Math.random() * data.count) + 1;
-    // let featuredPokemon;
-    // if (featured < 20) featuredPokemon = detailedPokemon.find(p => p.id === featured);
-    // else {
-    //   console.log('getting featured pokemon #', featured)
-    //   featuredPokemon = await getPokemonData(`https://pokeapi.co/api/v2/pokemon/${featured}/`);
-    // }
-    // if (this.state.results.length >= 99) debugger;
-
     // TEMP FIX to filter out pokemon when it can't be pulled from API and comes back undefined
     detailedPokemon = detailedPokemon.filter(p => p !== undefined);
 
     this.setState(prevState => ({
       ...data,
       results: [...prevState.results, ...detailedPokemon],
-      // featured: featuredPokemon,
       isLoading: false,
       observerTarget: detailedPokemon[detailedPokemon.length - 1].id
     }), () => {
@@ -84,7 +76,7 @@ class Pokedex extends React.Component {
           this.state.isLoading ? <Loader />
             :
             <>
-              {/* <Featured {...this.state.featured} /> */}
+              {this.state.featured && <Featured {...this.state.featured} />}
               <Searchbar />
               <Cards pokemon={this.state.results} />
             </>
