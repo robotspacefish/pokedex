@@ -1,5 +1,24 @@
 import React from 'react'
-import { shortenStatName, capitalize, convertWeight, convertHeight, getColor } from '../../helpers/helpers';
+import {
+  shortenStatName,
+  capitalize,
+  convertWeight,
+  convertHeight,
+  getColor
+} from '../../helpers/helpers';
+
+import {
+  Container,
+  Header,
+  Number,
+  Name,
+  Image,
+  Info,
+  Types,
+  Stats,
+  Box
+} from './styles/';
+
 import './Card.scss';
 
 export default function Card({ p }) {
@@ -7,39 +26,55 @@ export default function Card({ p }) {
   const color = getColor(p);
 
   return (
-    <div className="Card" id={p.id} style={{ border: `2px solid ${color}` }}>
-      <header>
-        <div className="Card--number" style={{ backgroundColor: color }}>
+    <Container className="Card__container" id={p.id} color={color}>
+      <Header>
+        <Number className="Card__number" color={color}>
           <span>{p.id}</span>
-        </div>
+        </Number>
 
-        <h3 className="Card--name">{p.name}</h3>
-      </header>
-      <img src={img} alt="" />
-      <div className="Card--info">
-        <div className="Card--stats__types">
-          {p.types.map(type => (
-            <div className="stat-box" style={{ border: `1px solid ${color}` }}>
-              {capitalize(type.type.name)}
-            </div>
-          ))}
+        <Name>
+          {p.name}
+        </Name>
+      </Header>
 
-        </div>
+      <Image className="Card__image" src={img} alt="" />
 
-        <div className="Card--stats__stats">
-          {p.stats.map(stat => <div className="stat-box" style={{ border: `1px solid ${color}` }}
-            title={stat.stat.name}
-          >
-            {shortenStatName(stat.stat.name)} {stat["base_stat"]}
-          </div>)}
-        </div>
+      <Info className="Card__info">
+        <Types>
+          {
+            p.types.map(type => (
+              <Box
+                key={type.type.name}
+                color={color}
+              >
+                {capitalize(type.type.name)}
+              </Box>
+            ))
+          }
+        </Types>
 
-        <div className="Card--stats__size">
-          <div className="stat-box" style={{ border: `1px solid ${color}` }}> {p["base_experience"]} EXP</div>
-          <div className="stat-box" style={{ border: `1px solid ${color}` }}> {convertHeight(p.height)}FT</div>
-          <div className="stat-box" style={{ border: `1px solid ${color}` }}> {convertWeight(p.weight)}LBS</div>
-        </div>
-      </div >
-    </div >
+        <Stats>
+          {
+            p.stats.map(stat => (
+              <Box
+                key={stat.stat.name}
+                color={color}
+              >
+                {shortenStatName(stat.stat.name)} {stat["base_stat"]}
+              </Box>
+            ))
+          }
+        </Stats>
+
+        <Stats className="Card--stats__size">
+          <Box className="stat-box" color={color}> {p["base_experience"]} EXP</Box>
+
+          <Box className="stat-box" color={color}> {convertHeight(p.height)}FT</Box>
+
+          <Box className="stat-box" color={color}> {convertWeight(p.weight)}LBS</Box>
+        </Stats>
+      </Info>
+
+    </Container >
   )
 }
