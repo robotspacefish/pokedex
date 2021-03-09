@@ -85,27 +85,23 @@ class Pokedex extends React.Component {
   }
 
   render() {
+    const { featured, results, isLoading } = this.state;
+
     return (
       <div className="Pokedex">
 
-        {this.state.featured && <Featured {...this.state.featured} />}
+        {featured && <Featured {...this.state.featured} />}
+
         {
-          this.state.results.length > 0 &&
+          results.length > 0 &&
           <>
             <Searchbar />
             <Cards pokemon={this.state.results} />
           </>
         }
-        {this.state.isLoading && <Loader />}
-        {/* {
-          this.state.isLoading ? <Loader />
-            :
-            <>
-              {this.state.featured && <Featured {...this.state.featured} />}
-              <Searchbar />
-              <Cards pokemon={this.state.results} />
-            </>
-        } */}
+
+        {isLoading && <Loader />}
+
       </div>
     );
   }
