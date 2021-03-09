@@ -87,7 +87,17 @@ class Pokedex extends React.Component {
   render() {
     return (
       <div className="Pokedex">
+
+        {this.state.featured && <Featured {...this.state.featured} />}
         {
+          this.state.results.length > 0 &&
+          <>
+            <Searchbar />
+            <Cards pokemon={this.state.results} />
+          </>
+        }
+        {this.state.isLoading && <Loader />}
+        {/* {
           this.state.isLoading ? <Loader />
             :
             <>
@@ -95,7 +105,7 @@ class Pokedex extends React.Component {
               <Searchbar />
               <Cards pokemon={this.state.results} />
             </>
-        }
+        } */}
       </div>
     );
   }
