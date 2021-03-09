@@ -26,9 +26,7 @@ class Loader extends React.Component {
 
   render() {
     return (
-      <div className="Loader">
-        <div className="loader" style={{ borderTop: `16px solid ${this.state.color}` }}></div>
-      </div>
+      <div className="Loader" style={{ borderTop: `16px solid ${this.state.color}` }}></div>
     )
   }
 }
