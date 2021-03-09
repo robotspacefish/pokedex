@@ -1,0 +1,10 @@
+.Featured {
+  width: 100%;
+
+  img {
+    @media only screen and (max-width: 640px) {
+      max-height: 200px;
+      width: auto;
+    }
+  }
+}

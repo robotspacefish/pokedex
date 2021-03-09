@@ -1,25 +1,17 @@
 import React from 'react';
-import './App.css';
+import Pokedex from './components/Pokedex/Pokedex';
+import Header from './components/Header/Header';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
+import './App.scss';
 
-    this.state = {
-      pokedex: []
-    };
-  }
+function App() {
+  return (
+    <div className="App">
+      <Header />
+      <Pokedex />
 
-  componentDidMount() {
-
-  }
-
-  render() {
-    return (
-      <div className="App">
-      </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default App;
