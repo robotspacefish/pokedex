@@ -19,7 +19,8 @@ class Pokedex extends React.Component {
       next: null,
       count: 0,
       isLoading: true,
-      observerTarget: null
+      observerTarget: null,
+      pageYOffset: null
     };
   }
 
@@ -38,7 +39,7 @@ class Pokedex extends React.Component {
 
     const featured = Math.floor(Math.random() * this.state.count) + 1;
     const featuredPokemon = await getPokemonData(`https://pokeapi.co/api/v2/pokemon/${featured}/`);
-    this.setState({ featured: featuredPokemon });
+    this.setState({ featured: featuredPokemon, pageYOffset: window.pageYOffset });
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -79,8 +80,10 @@ class Pokedex extends React.Component {
       isLoading: false,
       observerTarget: detailedPokemon[detailedPokemon.length - 1].id
     }), () => {
-      console.log("new observer target:", this.state.observerTarget)
+      // console.log("new observer target:", this.state.observerTarget)
       this.observer.observe(document.getElementById(this.state.observerTarget))
+
+
     });
   }
 
