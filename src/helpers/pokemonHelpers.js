@@ -19,7 +19,6 @@ export const TYPES = {
   steel: '#B8B8D0',
   dragon: '#7038F8',
   fairy: '#F9AEC9'
-
 }
 
 /**
@@ -34,7 +33,6 @@ export function filterOutDuplicates(pokemonToFilter, currentPokemonArray) {
 
 export async function getPokemonData(url) {
   try {
-    console.log('getting pokemon')
     const response = await fetch(url);
     const pokemon = await response.json();
 
