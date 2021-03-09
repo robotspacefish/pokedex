@@ -1,6 +1,6 @@
 import React from 'react';
 import { BASE_URL } from '../../helpers/helpers';
-import { filterOutDuplicates, getPokemonData, getGroupDetails } from '../../helpers/pokemonHelpers';
+import { filterOutDuplicates, getPokemonData, getGroupDetails, setLocalStorage, retrieveLocalStorage } from '../../helpers/pokemonHelpers';
 import Featured from '../Featured/Featured';
 import Searchbar from '../Searchbar/Searchbar';
 import Cards from '../Cards/Cards';
@@ -24,13 +24,28 @@ class Pokedex extends React.Component {
   }
 
   async componentDidMount() {
+    const localStorage = retrieveLocalStorage();
+    console.log(localStorage)
+    if (localStorage && localStorage.results.length > 0) {
+      console.log('setting from local storage')
+      this.setState({ ...localStorage, isLoading: false })
+      return;
+    }
+
     this.observer = new IntersectionObserver((entries, observer) => this.handleObserve(entries, observer));
 
-    await this.fetchAndStorePokemon(BASE_URL);
+    this.fetchAndStorePokemon(BASE_URL);
 
     const featured = Math.floor(Math.random() * this.state.count) + 1;
     const featuredPokemon = await getPokemonData(`https://pokeapi.co/api/v2/pokemon/${featured}/`);
     this.setState({ featured: featuredPokemon });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.results.length !== this.state.results.length) {
+      console.log('updating local storage')
+      setLocalStorage(this.state);
+    }
   }
 
   fetchNextGroup = () => {
