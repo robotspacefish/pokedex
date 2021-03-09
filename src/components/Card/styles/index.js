@@ -43,15 +43,25 @@ export const Info = styled.div`
 
 export const Types = styled.div`
   display: flex;
+  border-top: 2px solid ${({ color }) => color};
 `;
 
 export const Stats = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+
+  .Card__stats-exp {
+    border-bottom-left-radius: 15px;
+  }
+
+  .Card__stats-weight {
+    border-bottom-right-radius: 15px;
+  }
 `;
 
 export const Box = styled.div`
   border: 1px solid ${({ color }) => color};
   flex: 1;
   padding: 5px 0;
+  cursor: default;
 `;

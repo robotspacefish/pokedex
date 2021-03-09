@@ -19,7 +19,7 @@ import {
   Box
 } from './styles/';
 
-import './Card.scss';
+import './styles/Card.scss';
 
 export default function Card({ p }) {
   const img = p.sprites.other["official-artwork"]["front_default"];
@@ -40,12 +40,13 @@ export default function Card({ p }) {
       <Image className="Card__image" src={img} alt="" />
 
       <Info className="Card__info">
-        <Types>
+        <Types color={color}>
           {
             p.types.map(type => (
               <Box
                 key={type.type.name}
                 color={color}
+                className="Card__type"
               >
                 {capitalize(type.type.name)}
               </Box>
@@ -67,11 +68,11 @@ export default function Card({ p }) {
         </Stats>
 
         <Stats className="Card--stats__size">
-          <Box className="stat-box" color={color}> {p["base_experience"]} EXP</Box>
+          <Box className="Card__stats-exp" color={color}> {p["base_experience"]} EXP</Box>
 
-          <Box className="stat-box" color={color}> {convertHeight(p.height)}FT</Box>
+          <Box className="Card__stats-height" color={color}> {convertHeight(p.height)}FT</Box>
 
-          <Box className="stat-box" color={color}> {convertWeight(p.weight)}LBS</Box>
+          <Box className="Card__stats-weight" color={color}> {convertWeight(p.weight)}LBS</Box>
         </Stats>
       </Info>
 
