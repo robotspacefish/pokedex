@@ -70,9 +70,9 @@ export default function Card({ p }) {
         <Stats className="Card--stats__size">
           <Box className="Card__stats-exp" color={color}> {p["base_experience"]} EXP</Box>
 
-          <Box className="Card__stats-height" color={color}> {convertHeight(p.height)}FT</Box>
+          <Box className="Card__stats-height" color={color}> {convertHeight(p.height)} FT</Box>
 
-          <Box className="Card__stats-weight" color={color}> {convertWeight(p.weight)}LBS</Box>
+          <Box className="Card__stats-weight" color={color}> {convertWeight(p.weight)} LBS</Box>
         </Stats>
       </Info>
 
