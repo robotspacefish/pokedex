@@ -1,4 +1,5 @@
 import styled from 'styled-components/macro';
+import '../../../fonts/fonts.scss';
 
 export const Container = styled.div`
   margin: 10px;
@@ -20,15 +21,21 @@ export const Number = styled.div`
   background-color: ${({ color }) => color};
   color: white;
   min-width: 60px;
-  font-size: 2em;
-  padding: 10px;
+  font-size: 1.2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-bottom-right-radius: 15px;
+  font-family: "Pokemon Solid";
+  letter-spacing: 5px;
 `;
 
 export const Name = styled.h3`
   flex: 1;
-  font-variant: small-caps;
-  letter-spacing: 1px;
+  font-family: "Pokemon Solid";
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: ${({ color }) => color};
   margin-left: -30px;
 `;
 
