@@ -7,7 +7,7 @@ import './App.scss';
 
 function App() {
   return (
-    <div className="App">s
+    <div className="App">
       <Header />
       <Pokedex />
       {/* <BackToTopButton /> */}
