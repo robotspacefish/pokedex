@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import { Input, SubmitButton } from './styles';
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default class Searchbar extends Component {
   constructor(props) {
@@ -23,12 +26,20 @@ export default class Searchbar extends Component {
     return (
       <div className="Searchbar">
         <form onSubmit={this.handleOnSubmit}>
-          <input type="search"
+          <Input
+            type="search"
+            className="Searchbar__input"
             value={this.state.query}
             name="query"
             onChange={this.handleOnChange}
-          />
-          <input type="submit" value="Search" />
+            placeholder="name, number, or type"
+          >
+          </Input>
+
+          <SubmitButton className="Searchbar__input">
+            <FontAwesomeIcon icon={faSearch} />
+          </SubmitButton>
+
         </form>
       </div>
     )
