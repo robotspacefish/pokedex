@@ -1,6 +1,18 @@
 .Header {
   width: 100%;
   text-align: center;
+
+  .logo {
+    font-family: "Pokemon Hollow";
+    letter-spacing: 5px;
+    padding: 10px 20px;
+    margin-left: 20px;
+    color: white;
+    background-color: orange;
+    border: 1px solid orange;
+    border-radius: 5px;
+  }
+
   @media screen and (min-width: 640px) {
     display: flex;
     justify-content: space-between;
